@@ -1,8 +1,23 @@
 # SPDX-FileCopyrightText: Copyright (c) 2026 Marcin Bober
 # SPDX-License-Identifier: Apache-2.0
 
-menu "TI DRV83XX BLDC driver"
+menuconfig BLDC
+	bool "BLDC Controller"
+	help
+	  Enable BLDC controller support.
+
+if BLDC
+
+module = BLDC
+module-str = bldc
+source "subsys/logging/Kconfig.template.log_config"
+
+config BLDC_INIT_PRIORITY
+	int "BLDC Motor Controller init priority"
+	default 90
+	help
+	  BLDC motor controller init priority.
 
 rsource "Kconfig.drv83xx"
 
-endmenu
+endif

@@ -1,6 +1,9 @@
 # SPDX-FileCopyrightText: Copyright (c) 2026 Marcin Bober
 # SPDX-License-Identifier: Apache-2.0
 
+zephyr_include_directories(include)
+zephyr_syscall_header(${CMAKE_CURRENT_LIST_DIR}/include/zephyr/drivers/bldc.h)
+
 zephyr_library()
 zephyr_library_property(ALLOW_EMPTY TRUE)
 

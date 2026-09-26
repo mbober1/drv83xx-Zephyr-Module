@@ -1,0 +1,20 @@
+# SPDX-FileCopyrightText: Copyright (c) 2026 Marcin Bober
+# SPDX-License-Identifier: Apache-2.0
+
+description: |
+  TI DRV83XX stepper motor driver.
+  Compatible with drv8316.
+
+  Example:
+  &spi2 {
+    drv8316: drv8316 {
+      status = "okay";
+      compatible = "ti,drv83xx";
+    };
+  };
+
+
+compatible: "ti,drv83xx"
+
+include:
+  - name: spi-device.yaml

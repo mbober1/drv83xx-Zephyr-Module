@@ -107,25 +107,6 @@ void fault_event(const struct device *dev, struct gpio_callback *cb, uint32_t pi
 	}
 }
 
-static int drv83xx_init(const struct device *dev)
-{
-	const struct drv83xx_config *const config = dev->config;
-	const union drv83xx_bus *bus = &(config->bus);
-	int ret;
-
-	uint8_t data;
-	ret = drv83xx_spi_read(dev, 0x0, &data);
-
-	// setPWMMode
-	// setSlew
-	// setCurrentSenseGain
-	// setOCPMode
-	// setBuckVoltage
-
-	return 0;
-}
-
-
 static int drv83xx_bus_check_spi(const union drv83xx_bus *bus)
 {
 	return spi_is_ready_dt(&bus->spi) ? 0 : -ENODEV;
@@ -205,6 +186,24 @@ const struct drv83xx_bus_io drv83xx_bus_io_spi = {
 	.check = drv83xx_bus_check_spi,
 	.read = drv83xx_data_read_spi
 };
+
+static int drv83xx_init(const struct device *dev)
+{
+	const struct drv83xx_config *const config = dev->config;
+	const union drv83xx_bus *bus = &(config->bus);
+	int ret;
+
+	uint8_t data;
+	ret = drv83xx_spi_read(dev, 0x0, &data);
+
+	// setPWMMode
+	// setSlew
+	// setCurrentSenseGain
+	// setOCPMode
+	// setBuckVoltage
+
+	return 0;
+}
 
 #define DRV83XX_CONFIG_SPI(inst)				\
 	{						\
