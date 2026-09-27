@@ -213,7 +213,6 @@ static int drv83xx_spi_write(const struct device *dev, uint8_t addr, uint8_t val
 	const struct drv83xx_config *config = dev->config;
 	uint8_t tx_data[2] = {(uint8_t)(addr << 1), value};
 	uint8_t rx_data[2];
-	uint8_t actual;
 	struct spi_buf tx_buf = {.buf = tx_data, .len = sizeof(tx_data)};
 	struct spi_buf rx_buf = {.buf = rx_data, .len = sizeof(rx_data)};
 	struct spi_buf_set tx = {.buffers = &tx_buf, .count = 1};
@@ -227,6 +226,7 @@ static int drv83xx_spi_write(const struct device *dev, uint8_t addr, uint8_t val
 	int ret = spi_transceive_dt(&config->bus.spi, &tx, &rx);
 
 	#if CONFIG_DRV83XX_READBACK
+	uint8_t actual;
 	ret = drv83xx_spi_read(dev, addr, &actual);
 
 	if (ret >= 0 && (actual != value)) {
