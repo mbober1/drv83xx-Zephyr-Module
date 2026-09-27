@@ -7,3 +7,13 @@ config DRV83XX
 	depends on DT_HAS_TI_DRV83XX_ENABLED
 	help
 	  Enable driver for TI DRV83XX bldc motor driver.
+
+if DRV83XX
+
+config DRV83XX_READBACK
+	bool "DRV83XX read back"
+	default n
+	help
+		Enable reading values after succesful write.
+
+endif

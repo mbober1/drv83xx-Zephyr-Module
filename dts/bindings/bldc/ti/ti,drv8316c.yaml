@@ -1,0 +1,28 @@
+# SPDX-License-Identifier: Apache-2.0
+
+description: TI DRV8316C motor configuration.
+
+compatible: "ti,drv8316c"
+
+include: base.yaml
+
+properties:
+  enable-comp-outputs:
+    type: boolean
+    description: Enable complementary PWM outputs.
+# SPDX-License-Identifier: Apache-2.0
+
+description: TI DRV8316C motor configuration.
+
+compatible: "ti,drv8316c"
+
+include: base.yaml
+
+properties:
+  enable-comp-outputs:
+    type: boolean
+    description: Enable complementary PWM outputs.
+
+  enable-gpios:
+    type: phandle-array
+    description: Motor driver enable GPIOs.

@@ -1,20 +1,104 @@
 # SPDX-FileCopyrightText: Copyright (c) 2026 Marcin Bober
 # SPDX-License-Identifier: Apache-2.0
 
-description: |
-  TI DRV83XX stepper motor driver.
-  Compatible with drv8316.
-
-  Example:
-  &spi2 {
-    drv8316: drv8316 {
-      status = "okay";
-      compatible = "ti,drv83xx";
-    };
-  };
-
+description: TI DRV8316C three-phase gate driver.
 
 compatible: "ti,drv83xx"
 
 include:
   - name: spi-device.yaml
+
+properties:
+  enable-gpios:
+    type: phandle-array
+    required: true
+    description: Active-high DRV8316C enable and wake pin.
+
+  pwm-mode:
+    type: int
+    required: true
+    enum: [0, 1, 2, 3]
+    description: 0=6-PWM, 1=6-PWM with current limit, 2=3-PWM, 3=3-PWM with current limit.
+  slew-rate:
+    type: int
+    required: true
+    enum: [0, 1, 2, 3]
+    description: 0=25, 1=50, 2=150, 3=200 V/us.
+  sdo-mode:
+    type: int
+    required: true
+    enum: [0, 1]
+    description: 0=open-drain, 1=push-pull.
+  csa-gain:
+    type: int
+    required: true
+    enum: [0, 1, 2, 3]
+    description: Current Sense Amplifier's Gain Settings 0=0.15, 1=0.1875, 2=0.25, 3=0.375 V/V.
+  ocp-mode:
+    type: int
+    required: true
+    enum: [0, 1, 2, 3]
+    description: 0=latched fault, 1=auto-retry, 2=report-only, 3=no action.
+  ocp-level:
+    type: int
+    required: true
+    enum: [0, 1]
+    description: Overcurrent Level 0=16 A, 1=24 A.
+  ocp-retry:
+    type: int
+    required: true
+    enum: [0, 1]
+    description: 0=5 ms, 1=500 ms.
+  ocp-deglitch:
+    type: int
+    required: true
+    enum: [0, 1, 2, 3]
+    description: 0=0.2 us, 1=0.6 us, 2=1.1 us, 3=1.6 us.
+  recirculation-mode:
+    type: int
+    required: true
+    enum: [0, 1]
+    description: 0=brake, 1=coast.
+  pwm-100-duty-frequency:
+    type: int
+    required: true
+    enum: [0, 1]
+    description: Freqency of PWM at 100% Duty Cycle 0=20 kHz, 1=40 kHz.
+  overvoltage-enable:
+    type: boolean
+  overvoltage-level:
+    type: int
+    required: true
+    enum: [0, 1]
+    description: 0=32 V, 1=20 V.
+  synchronous-rectification:
+    type: boolean
+  asynchronous-rectification:
+    type: boolean
+  overtemperature-report:
+    type: boolean
+  spi-fault-report:
+    type: boolean
+  ocp-cycle-by-cycle:
+    type: boolean
+  buck-enable:
+    type: boolean
+  buck-voltage:
+    type: int
+    required: true
+    enum: [0, 1, 2, 3]
+    description: 0=3.3 V, 1=5 V, 2=4 V, 3=5.7 V.
+  buck-current-limit:
+    type: int
+    required: true
+    enum: [0, 1]
+    description: 0=600 mA, 1=150 mA.
+  buck-power-sequencing:
+    type: boolean
+  delay-target:
+    type: int
+    required: true
+    enum: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+    description: 0=0 us, 1=0.4 us, 2=0.6 us, then 0.2 us steps through 3.2 us.
+  delay-compensation:
+    type: boolean
