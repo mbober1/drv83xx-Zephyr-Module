@@ -5,6 +5,7 @@ config DRV83XX
 	bool "TI DRV83XX bldc motor driver"
 	default y
 	depends on DT_HAS_TI_DRV83XX_ENABLED
+	select SPI
 	help
 	  Enable driver for TI DRV83XX bldc motor driver.
 
